@@ -143,6 +143,10 @@ class NumericType(BaseType):
     def less_than_or_equal_to(self, other_numeric):
         return self.less_than(other_numeric) or self.equal_to(other_numeric)
 
+    @type_operator(FIELD_NUMERIC)
+    def between(self, from_numeric, to_numeric):
+        return self.greater_than_or_equal_to(from_numeric) and self.less_than_or_equal_to(to_numeric)
+
 
 @export_type
 class BooleanType(BaseType):
