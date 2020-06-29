@@ -155,6 +155,8 @@ def _do_operator_comparison(operator_type, operator_name, comparison_value):
     method = getattr(operator_type, operator_name, fallback)
     if getattr(method, 'input_type', '') == FIELD_NO_INPUT:
         return method()
+    if isinstance(comparison_value, (list, tuple)) and len(comparison_value) == 2:
+        return method(comparison_value[0], comparison_value[1])
     return method(comparison_value)
 
 

@@ -119,6 +119,8 @@ class NumericType(BaseType):
             return Decimal(value)
         if isinstance(value, Decimal):
             return value
+        if isinstance(value, (list, tuple)) and len(value) == 2:
+            return (Decimal(value[0]), Decimal(value[1]))
         else:
             raise AssertionError("{0} is not a valid numeric type.".
                                  format(value))
